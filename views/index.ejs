@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://releases.transloadit.com/uppy/v4.3.0/uppy.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
+  </head>
+  <body id="body-pd">
+    <%- include('partials/header.ejs') %>
+    <div
+      class="height-100 bg-light d-flex justify-content-center align-items-center"
+    >
+      <% if ( locals.page ) { switch ( page ) { case "dashboard" : %> <%-
+      include("pages/dashboard.ejs") %> <% break; case "newNote" : %> <%-
+      include("pages/newNote.ejs") %> <% break; case "imgText" : %> <%-
+      include("pages/imgText.ejs") %> <% break; } } %>
+    </div>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
+  <script type="module">
+    import {
+      Uppy,
+      Dashboard,
+      DragDrop,
+    } from "https://releases.transloadit.com/uppy/v4.3.0/uppy.min.mjs";
+    const uppy = new Uppy({
+      debug: true,
+      autoProceed: false,
+      restrictions: {
+        maxNumberOfFiles: 1,
+
+        allowedFileTypes: ["image/*"],
+      },
+    });
+    uppy
+      .use(Dashboard, {
+        target: "#uppy",
+        inline: true,
+        showProgressDetails: true,
+        proudlyDisplayPoweredByUppy: true,
+        note: "Images only",
+      })
+      .use(DragDrop, { target: Dashboard });
+  </script>
+  <script src="/js/main.js"></script>
+</html>

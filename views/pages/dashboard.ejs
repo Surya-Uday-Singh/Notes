@@ -1,0 +1,35 @@
+<div class="ag-courses_wrapper">
+  <div class="ag-courses_box">
+    <% if ( locals.noteArr && noteArr.length > 0 ) { %> <% for ( let i = 0; i <
+    noteArr.length; i++ ) { %>
+    <div class="ag-courses_item">
+      <div class="ag-courses-item_link">
+        <div class="ag-courses-item_bg"></div>
+
+        <div class="ag-courses-item_title"><%= noteArr[i].title %></div>
+        <div class="ag-courses-item_content"><%= noteArr[i].text %></div>
+
+        <div class="ag-courses-item_date-box">
+          Created on
+          <span class="ag-courses-item_date"> <%= noteArr[i].date %> </span>
+        </div>
+        <div class="ag-courses-item_buttons">
+          <!-- Edit Form -->
+          <form action="/edit" method="POST" style="display: inline">
+            <input type="hidden" name="id" value="<%= noteArr[i].id %>" />
+            <button type="submit" class="btn-edit">Edit</button>
+          </form>
+
+          <!-- Delete Form -->
+          <form action="/delete" method="post" style="display: inline">
+            <input type="hidden" name="id" value="<%= noteArr[i].id %>" />
+            <button type="submit" class="btn-delete">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %> <% } else { %>
+    <div><h1>No notes to display yet</h1></div>
+    <% } %>
+  </div>
+</div>
